@@ -32,25 +32,25 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Sound Sequence");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Sequence Archive", 1, 1);
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Instrument Bank", 2, 2);
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Wave Archive", 3, 3);
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Sequence Player", 4, 4);
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Group", 5, 5);
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Stream Player", 6, 6);
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Stream", 7, 7);
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Sequence", 8, 8);
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Sequence Archive", 8, 8);
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Bank", 8, 8);
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Wave Archive", 8, 8);
-            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Stream", 8, 8);
-            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("FILES", 8, 8, new System.Windows.Forms.TreeNode[] {
-            treeNode23,
-            treeNode24,
-            treeNode25,
-            treeNode26,
-            treeNode27});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Sound Sequence");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Sequence Archive", 1, 1);
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Instrument Bank", 2, 2);
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Wave Archive", 3, 3);
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Sequence Player", 4, 4);
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Group", 5, 5);
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Stream Player", 6, 6);
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Stream", 7, 7);
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Sequence", 8, 8);
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Sequence Archive", 8, 8);
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Bank", 8, 8);
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Wave Archive", 8, 8);
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Stream", 8, 8);
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("FILES", 8, 8, new System.Windows.Forms.TreeNode[] {
+            treeNode9,
+            treeNode10,
+            treeNode11,
+            treeNode12,
+            treeNode13});
             this.bigFolderMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,6 +67,7 @@
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bankGeneratorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.convertToSDKProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -199,7 +200,6 @@
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
-            this.convertToSDKProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bigFolderMenu.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -384,16 +384,24 @@
             this.bankGeneratorToolStripMenuItem,
             this.convertToSDKProjectToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // bankGeneratorToolStripMenuItem
             // 
             this.bankGeneratorToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("bankGeneratorToolStripMenuItem.Image")));
             this.bankGeneratorToolStripMenuItem.Name = "bankGeneratorToolStripMenuItem";
-            this.bankGeneratorToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.bankGeneratorToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
             this.bankGeneratorToolStripMenuItem.Text = "Bank Generator";
             this.bankGeneratorToolStripMenuItem.Click += new System.EventHandler(this.bankGeneratorToolStripMenuItem_Click);
+            // 
+            // convertToSDKProjectToolStripMenuItem
+            // 
+            this.convertToSDKProjectToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("convertToSDKProjectToolStripMenuItem.Image")));
+            this.convertToSDKProjectToolStripMenuItem.Name = "convertToSDKProjectToolStripMenuItem";
+            this.convertToSDKProjectToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.convertToSDKProjectToolStripMenuItem.Text = "Convert To SDK Project";
+            this.convertToSDKProjectToolStripMenuItem.Click += new System.EventHandler(this.convertToSDKProjectToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -1665,80 +1673,80 @@
             this.tree.Indent = 15;
             this.tree.Location = new System.Drawing.Point(0, 0);
             this.tree.Name = "tree";
-            treeNode15.Name = "Sseq";
-            treeNode15.Tag = "sseq";
-            treeNode15.Text = "Sound Sequence";
-            treeNode16.ImageIndex = 1;
-            treeNode16.Name = "SeqArc";
-            treeNode16.SelectedImageIndex = 1;
-            treeNode16.Tag = "seqarc";
-            treeNode16.Text = "Sequence Archive";
-            treeNode17.ImageIndex = 2;
-            treeNode17.Name = "Bank";
-            treeNode17.SelectedImageIndex = 2;
-            treeNode17.Tag = "bank";
-            treeNode17.Text = "Instrument Bank";
-            treeNode18.ImageIndex = 3;
-            treeNode18.Name = "Wave Archive";
-            treeNode18.SelectedImageIndex = 3;
-            treeNode18.Tag = "wave";
-            treeNode18.Text = "Wave Archive";
-            treeNode19.ImageIndex = 4;
-            treeNode19.Name = "Sequence Player";
-            treeNode19.SelectedImageIndex = 4;
-            treeNode19.Tag = "player";
-            treeNode19.Text = "Sequence Player";
-            treeNode20.ImageIndex = 5;
-            treeNode20.Name = "Group";
-            treeNode20.SelectedImageIndex = 5;
-            treeNode20.Tag = "group";
-            treeNode20.Text = "Group";
-            treeNode21.ImageIndex = 6;
-            treeNode21.Name = "Strm Player";
-            treeNode21.SelectedImageIndex = 6;
-            treeNode21.Tag = "strmplayer";
-            treeNode21.Text = "Stream Player";
-            treeNode22.ImageIndex = 7;
-            treeNode22.Name = "strm";
-            treeNode22.SelectedImageIndex = 7;
-            treeNode22.Tag = "strm";
-            treeNode22.Text = "Stream";
-            treeNode23.ImageIndex = 8;
-            treeNode23.Name = "sequenceFiles";
-            treeNode23.SelectedImageIndex = 8;
-            treeNode23.Text = "Sequence";
-            treeNode24.ImageIndex = 8;
-            treeNode24.Name = "sequenceArchive";
-            treeNode24.SelectedImageIndex = 8;
-            treeNode24.Text = "Sequence Archive";
-            treeNode25.ImageIndex = 8;
-            treeNode25.Name = "bankFiles";
-            treeNode25.SelectedImageIndex = 8;
-            treeNode25.Text = "Bank";
-            treeNode26.ImageIndex = 8;
-            treeNode26.Name = "waveFiles";
-            treeNode26.SelectedImageIndex = 8;
-            treeNode26.Text = "Wave Archive";
-            treeNode27.ImageIndex = 8;
-            treeNode27.Name = "strmFiles";
-            treeNode27.SelectedImageIndex = 8;
-            treeNode27.Text = "Stream";
-            treeNode28.ContextMenuStrip = this.bigFolderMenu;
-            treeNode28.ImageIndex = 8;
-            treeNode28.Name = "FILES";
-            treeNode28.SelectedImageIndex = 8;
-            treeNode28.Tag = "files";
-            treeNode28.Text = "FILES";
+            treeNode1.Name = "Sseq";
+            treeNode1.Tag = "sseq";
+            treeNode1.Text = "Sound Sequence";
+            treeNode2.ImageIndex = 1;
+            treeNode2.Name = "SeqArc";
+            treeNode2.SelectedImageIndex = 1;
+            treeNode2.Tag = "seqarc";
+            treeNode2.Text = "Sequence Archive";
+            treeNode3.ImageIndex = 2;
+            treeNode3.Name = "Bank";
+            treeNode3.SelectedImageIndex = 2;
+            treeNode3.Tag = "bank";
+            treeNode3.Text = "Instrument Bank";
+            treeNode4.ImageIndex = 3;
+            treeNode4.Name = "Wave Archive";
+            treeNode4.SelectedImageIndex = 3;
+            treeNode4.Tag = "wave";
+            treeNode4.Text = "Wave Archive";
+            treeNode5.ImageIndex = 4;
+            treeNode5.Name = "Sequence Player";
+            treeNode5.SelectedImageIndex = 4;
+            treeNode5.Tag = "player";
+            treeNode5.Text = "Sequence Player";
+            treeNode6.ImageIndex = 5;
+            treeNode6.Name = "Group";
+            treeNode6.SelectedImageIndex = 5;
+            treeNode6.Tag = "group";
+            treeNode6.Text = "Group";
+            treeNode7.ImageIndex = 6;
+            treeNode7.Name = "Strm Player";
+            treeNode7.SelectedImageIndex = 6;
+            treeNode7.Tag = "strmplayer";
+            treeNode7.Text = "Stream Player";
+            treeNode8.ImageIndex = 7;
+            treeNode8.Name = "strm";
+            treeNode8.SelectedImageIndex = 7;
+            treeNode8.Tag = "strm";
+            treeNode8.Text = "Stream";
+            treeNode9.ImageIndex = 8;
+            treeNode9.Name = "sequenceFiles";
+            treeNode9.SelectedImageIndex = 8;
+            treeNode9.Text = "Sequence";
+            treeNode10.ImageIndex = 8;
+            treeNode10.Name = "sequenceArchive";
+            treeNode10.SelectedImageIndex = 8;
+            treeNode10.Text = "Sequence Archive";
+            treeNode11.ImageIndex = 8;
+            treeNode11.Name = "bankFiles";
+            treeNode11.SelectedImageIndex = 8;
+            treeNode11.Text = "Bank";
+            treeNode12.ImageIndex = 8;
+            treeNode12.Name = "waveFiles";
+            treeNode12.SelectedImageIndex = 8;
+            treeNode12.Text = "Wave Archive";
+            treeNode13.ImageIndex = 8;
+            treeNode13.Name = "strmFiles";
+            treeNode13.SelectedImageIndex = 8;
+            treeNode13.Text = "Stream";
+            treeNode14.ContextMenuStrip = this.bigFolderMenu;
+            treeNode14.ImageIndex = 8;
+            treeNode14.Name = "FILES";
+            treeNode14.SelectedImageIndex = 8;
+            treeNode14.Tag = "files";
+            treeNode14.Text = "FILES";
             this.tree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode15,
-            treeNode16,
-            treeNode17,
-            treeNode18,
-            treeNode19,
-            treeNode20,
-            treeNode21,
-            treeNode22,
-            treeNode28});
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode5,
+            treeNode6,
+            treeNode7,
+            treeNode8,
+            treeNode14});
             this.tree.SelectedImageIndex = 0;
             this.tree.ShowLines = false;
             this.tree.Size = new System.Drawing.Size(585, 446);
@@ -1772,13 +1780,13 @@
             this.Replace,
             this.Delete});
             this.filesMenu.Name = "filesMenu";
-            this.filesMenu.Size = new System.Drawing.Size(159, 114);
+            this.filesMenu.Size = new System.Drawing.Size(158, 114);
             // 
             // addAbove
             // 
             this.addAbove.Image = ((System.Drawing.Image)(resources.GetObject("addAbove.Image")));
             this.addAbove.Name = "addAbove";
-            this.addAbove.Size = new System.Drawing.Size(158, 22);
+            this.addAbove.Size = new System.Drawing.Size(157, 22);
             this.addAbove.Text = "Add Above This";
             this.addAbove.Click += new System.EventHandler(this.addAbove_Click);
             // 
@@ -1786,7 +1794,7 @@
             // 
             this.addBelow.Image = ((System.Drawing.Image)(resources.GetObject("addBelow.Image")));
             this.addBelow.Name = "addBelow";
-            this.addBelow.Size = new System.Drawing.Size(158, 22);
+            this.addBelow.Size = new System.Drawing.Size(157, 22);
             this.addBelow.Text = "Add Below This";
             this.addBelow.Click += new System.EventHandler(this.addBelow_Click);
             // 
@@ -1794,7 +1802,7 @@
             // 
             this.Export.Image = ((System.Drawing.Image)(resources.GetObject("Export.Image")));
             this.Export.Name = "Export";
-            this.Export.Size = new System.Drawing.Size(158, 22);
+            this.Export.Size = new System.Drawing.Size(157, 22);
             this.Export.Text = "Export";
             this.Export.Click += new System.EventHandler(this.Export_Click);
             // 
@@ -1802,7 +1810,7 @@
             // 
             this.Replace.Image = ((System.Drawing.Image)(resources.GetObject("Replace.Image")));
             this.Replace.Name = "Replace";
-            this.Replace.Size = new System.Drawing.Size(158, 22);
+            this.Replace.Size = new System.Drawing.Size(157, 22);
             this.Replace.Text = "Replace";
             this.Replace.Click += new System.EventHandler(this.Replace_Click);
             // 
@@ -1810,7 +1818,7 @@
             // 
             this.Delete.Image = ((System.Drawing.Image)(resources.GetObject("Delete.Image")));
             this.Delete.Name = "Delete";
-            this.Delete.Size = new System.Drawing.Size(158, 22);
+            this.Delete.Size = new System.Drawing.Size(157, 22);
             this.Delete.Text = "Delete";
             this.Delete.Click += new System.EventHandler(this.Delete_Click);
             // 
@@ -2033,14 +2041,6 @@
             this.toolStripMenuItem12.Size = new System.Drawing.Size(133, 22);
             this.toolStripMenuItem12.Text = "Delete";
             this.toolStripMenuItem12.Click += new System.EventHandler(this.toolStripMenuItem12_Click);
-            // 
-            // convertToSDKProjectToolStripMenuItem
-            // 
-            this.convertToSDKProjectToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("convertToSDKProjectToolStripMenuItem.Image")));
-            this.convertToSDKProjectToolStripMenuItem.Name = "convertToSDKProjectToolStripMenuItem";
-            this.convertToSDKProjectToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.convertToSDKProjectToolStripMenuItem.Text = "Convert To SDK Project";
-            this.convertToSDKProjectToolStripMenuItem.Click += new System.EventHandler(this.convertToSDKProjectToolStripMenuItem_Click);
             // 
             // MainWindow
             // 

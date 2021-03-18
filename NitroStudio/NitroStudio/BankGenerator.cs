@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NitroFileLoader;
@@ -18,6 +19,11 @@ namespace NitroStudio
         public MainWindow parent;
         List<GenEntry> gens;
         List<instrumentToFix> instrumentsToFix;
+
+        public static class Globals
+        {
+            public static int monindex = 0;
+        }
 
         public class GenEntry {
 
@@ -142,7 +148,6 @@ namespace NitroStudio
 
         }
 
-
         /// <summary>
         /// Generate a new bank.
         /// </summary>
@@ -151,108 +156,113 @@ namespace NitroStudio
         private void genButton_Click(object sender, EventArgs e)
         {
 
-            swarFile s = new swarFile();
-            sbnkFile b = new sbnkFile();
-            s.data = new swarFile.swarData[1];
-            b.data = new sbnkFile.sbnkData[1];
-            s.data[0].files = new byte[0][];
-            b.data[0].records = new sbnkFile.sbnkInstrumentRecord[0];
-
-            List<byte[]> files = new List<byte[]>();
-            List<sbnkFile.sbnkInstrumentRecord> records = new List<sbnkFile.sbnkInstrumentRecord>();
-
-            UInt16 swavId = 0;
-            foreach (GenEntry g in gens)
+            for (int fuck = 0; fuck <= 356; fuck++)
             {
+                swarFile s = new swarFile();
+                sbnkFile b = new sbnkFile();
+                s.data = new swarFile.swarData[1];
+                b.data = new sbnkFile.sbnkData[1];
+                s.data[0].files = new byte[0][];
+                b.data[0].records = new sbnkFile.sbnkInstrumentRecord[0];
 
-                int fileStart = files.Count();
-                Dictionary<int, Dictionary<int, int>> newSwavs = new Dictionary<int, Dictionary<int, int>>();
-                sbnkFile currInstrument = new sbnkFile();
-                if (!parent.sdat.infoFile.bankData[g.index].isPlaceHolder)
+                List<byte[]> files = new List<byte[]>();
+                List<sbnkFile.sbnkInstrumentRecord> records = new List<sbnkFile.sbnkInstrumentRecord>();
+
+                UInt16 swavId = 0;
+                foreach (GenEntry g in gens)
                 {
 
-                    currInstrument.load(parent.sdat.files.files[(int)parent.sdat.infoFile.bankData[g.index].fileId]);
-
-                    foreach (int instrument in g.instruments)
+                    int fileStart = files.Count();
+                    Dictionary<int, Dictionary<int, int>> newSwavs = new Dictionary<int, Dictionary<int, int>>();
+                    sbnkFile currInstrument = new sbnkFile();
+                    if (!parent.sdat.infoFile.bankData[g.index].isPlaceHolder)
                     {
 
-                        try
+                        currInstrument.load(parent.sdat.files.files[(int)parent.sdat.infoFile.bankData[g.index].fileId]);
+
+                        foreach (int instrument in g.instruments)
                         {
 
-                            sbnkFile.sbnkInstrumentRecord currentRecord = currInstrument.data[0].records[instrument];
-
-                            //Set universal wave data.
-                            if (currentRecord.fRecord == 1)
+                            try
                             {
 
-                                FixInstrumentIndexStuffUniversal(ref currentRecord.instrumentA, ref newSwavs, ref swavId, ref files, parent.sdat.infoFile.bankData[g.index]);
+                                sbnkFile.sbnkInstrumentRecord currentRecord = currInstrument.data[0].records[instrument];
 
-                            }
-
-                            //Set ranged wave data.
-                            else if (currentRecord.fRecord == 16)
-                            {
-
-                                for (int i = 0; i < currentRecord.instrumentB.stuff.Count; i++)
+                                //Set universal wave data.
+                                if (currentRecord.fRecord == 1)
                                 {
-                                    sbnkFile.basicInstrumentStuff bcd = currentRecord.instrumentB.stuff[i];
-                                    FixInstrumentIndexStuffOther(ref bcd, ref newSwavs, ref swavId, ref files, parent.sdat.infoFile.bankData[g.index]);
-                                    currentRecord.instrumentB.stuff[i] = bcd;
+
+                                    FixInstrumentIndexStuffUniversal(ref currentRecord.instrumentA, ref newSwavs, ref swavId, ref files, parent.sdat.infoFile.bankData[g.index]);
+
                                 }
 
-                            }
-
-                            //Set regional wave data.
-                            else if (currentRecord.fRecord > 16)
-                            {
-
-                                for (int i = 0; i < currentRecord.instrumentC.stuff.Count; i++)
+                                //Set ranged wave data.
+                                else if (currentRecord.fRecord == 16)
                                 {
-                                    sbnkFile.basicInstrumentStuff bcd = currentRecord.instrumentC.stuff[i];
-                                    FixInstrumentIndexStuffOther(ref bcd, ref newSwavs, ref swavId, ref files, parent.sdat.infoFile.bankData[g.index]);
-                                    currentRecord.instrumentC.stuff[i] = bcd;
+
+                                    for (int i = 0; i < currentRecord.instrumentB.stuff.Count; i++)
+                                    {
+                                        sbnkFile.basicInstrumentStuff bcd = currentRecord.instrumentB.stuff[i];
+                                        FixInstrumentIndexStuffOther(ref bcd, ref newSwavs, ref swavId, ref files, parent.sdat.infoFile.bankData[g.index]);
+                                        currentRecord.instrumentB.stuff[i] = bcd;
+                                    }
+
                                 }
 
+                                //Set regional wave data.
+                                else if (currentRecord.fRecord > 16)
+                                {
+
+                                    for (int i = 0; i < currentRecord.instrumentC.stuff.Count; i++)
+                                    {
+                                        sbnkFile.basicInstrumentStuff bcd = currentRecord.instrumentC.stuff[i];
+                                        FixInstrumentIndexStuffOther(ref bcd, ref newSwavs, ref swavId, ref files, parent.sdat.infoFile.bankData[g.index]);
+                                        currentRecord.instrumentC.stuff[i] = bcd;
+                                    }
+
+                                }
+
+                                //Add instrument.
+                                records.Add(currentRecord);
+
+                            }
+                            catch {
+                                MessageBox.Show("Couldn't add instrument " + instrument + " from bank " + g.index + ".", "Notice:");
                             }
 
-                            //Add instrument.
-                            records.Add(currentRecord);
-
-                        }
-                        catch {
-                            MessageBox.Show("Couldn't add instrument " + instrument + " from bank " + g.index + ".", "Notice:");
                         }
 
                     }
 
                 }
 
+                s.data[0].files = files.ToArray();
+                b.data[0].records = records.ToArray();
+
+                parent.sdat.files.bankFiles.Add(b.toBytes());
+                parent.sdat.files.waveFiles.Add(s.toBytes());
+                parent.sdat.fixOffsets();
+
+                parent.sdat.infoFile.bankData.Add(new BankData { fileId = (UInt32)(parent.sdat.files.bankFiles.Count + parent.sdat.files.seqArcFiles.Count + parent.sdat.files.sseqFiles.Count - 1), isPlaceHolder = false, wave0 = (UInt16)(parent.sdat.infoFile.waveData.Count), wave1 = 0xFFFF, wave2 = 0xFFFF, wave3 = 0xFFFF });
+                parent.sdat.symbFile.bankStrings.Add(new symbStringName { isPlaceHolder = false, name = "BANK_PV" + (544 + Globals.monindex).ToString() });
+
+                parent.sdat.infoFile.waveData.Add(new WaveData { isPlaceHolder = false, fileId = (UInt32)(parent.sdat.files.waveFiles.Count + parent.sdat.files.bankFiles.Count + parent.sdat.files.seqArcFiles.Count + parent.sdat.files.sseqFiles.Count - 1) });
+                parent.sdat.symbFile.waveStrings.Add(new symbStringName { isPlaceHolder = false, name = "WAVE_ARC_PV" + (544 + Globals.monindex).ToString() });
+
+                Globals.monindex++;
+
+                //Fix file ids.
+                for (int i = 0; i < parent.sdat.infoFile.waveData.Count - 1; i++) {
+                    parent.sdat.infoFile.waveData[i].fileId += 1;
+                }
+                for (int i = 0; i < parent.sdat.infoFile.strmData.Count; i++)
+                {
+                    parent.sdat.infoFile.strmData[i].fileId += 2;
+                }
+
+                parent.sdat.fixOffsets();
+                parent.updateNodes();
             }
-
-            s.data[0].files = files.ToArray();
-            b.data[0].records = records.ToArray();
-
-            parent.sdat.files.bankFiles.Add(b.toBytes());
-            parent.sdat.files.waveFiles.Add(s.toBytes());
-            parent.sdat.fixOffsets();
-
-            parent.sdat.infoFile.bankData.Add(new BankData { fileId = (UInt32)(parent.sdat.files.bankFiles.Count + parent.sdat.files.seqArcFiles.Count + parent.sdat.files.sseqFiles.Count - 1), isPlaceHolder = false, wave0 = (UInt16)(parent.sdat.infoFile.waveData.Count), wave1 = 0xFFFF, wave2 = 0xFFFF, wave3 = 0xFFFF });
-            parent.sdat.symbFile.bankStrings.Add(new symbStringName { isPlaceHolder = false, name = "GENERATED_BANK" });
-
-            parent.sdat.infoFile.waveData.Add(new WaveData { isPlaceHolder = false, fileId = (UInt32)(parent.sdat.files.waveFiles.Count + parent.sdat.files.bankFiles.Count + parent.sdat.files.seqArcFiles.Count + parent.sdat.files.sseqFiles.Count - 1) });
-            parent.sdat.symbFile.waveStrings.Add(new symbStringName { isPlaceHolder = false, name = "GENERATED_WAVE" });
-
-            //Fix file ids.
-            for (int i = 0; i < parent.sdat.infoFile.waveData.Count - 1; i++) {
-                parent.sdat.infoFile.waveData[i].fileId += 1;
-            }
-            for (int i = 0; i < parent.sdat.infoFile.strmData.Count; i++)
-            {
-                parent.sdat.infoFile.strmData[i].fileId += 2;
-            }
-
-            parent.sdat.fixOffsets();
-            parent.updateNodes();
 
             MessageBox.Show("Done! It's recommended that you re-open all open banks and streams!", "Notice:");
 
